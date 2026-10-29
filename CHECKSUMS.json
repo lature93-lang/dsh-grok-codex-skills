@@ -1,5 +1,6 @@
 {
   "skills/dsh-delivery-dispatch/references/environment-boundary.md": "0df3c2df5f48a72b70d3ce29c74218703250c5595cb33f70272c1b485c3ee364",
-  "skills/dsh-delivery-dispatch/SKILL.md": "4fb99a866f4d776543a005b5f519b25444fddda1224fb4a5e35d9a4f866ea43a",
-  "skills/grok-delivery-review/SKILL.md": "17e5a220a9cb22f4d5ff6b80ffddca4e98a39bf0ab98a72b1ce6ab94c3ff085f"
+  "skills/dsh-delivery-dispatch/SKILL.md": "55e3371c139b2cb0435b5253ce872df6d0af92c2304f6687f538374d09d3c692",
+  "skills/grok-delivery-review/SKILL.md": "51dc87c0f6a37db3b5cd7a23da35f7a96dafb1b256c1090f5ca57fba3cd75a61",
+  "skills/grok-delivery-review/agents/openai.yaml": "3bf863a8856d04a6a1c4f23b3aae6cbf5388544129662c55cc733c2d9c23bbbf"
 }

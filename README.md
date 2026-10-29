@@ -1,6 +1,13 @@
 # DSH · Grok · Codex 协作技能
 
-两份可迁移的 skill，版本 `v0.1.0`。DSH 主调度，Grok 设计及独立质检，Codex 实现。
+两份可迁移的 skill，版本 `v0.1.1`。DSH 主调度，Grok 设计及独立质检，Codex 实现。
+
+## 触发与联合派工
+
+- 「使用流水线技能实现 xxx 需求」显式启用 `grok-delivery-review`。
+- 「使用AI班组技能实现 xx 需求」显式启用 [opc-ai-workbench](https://github.com/lature93-lang/opc-ai-workbench)。
+- DSH 每次派 Grok 做方案、质检或复验，都要求加载这两份完整技能并回执名称和版本；提示词模板见 DSH skill「发给 Grok 的提示词」。联合模式中 DSH 统一调 Codex，Grok 向 DSH 交回。
+- 普通需求及仅提及口令不自动启用。`agents/openai.yaml` 禁止 Codex 隐式调用；其他宿主需依正文执行显式触发规则，口令本身不是程序级拦截器。
 
 ## 流程
 
@@ -22,7 +29,7 @@ Copy-Item -LiteralPath '.\skills\dsh-delivery-dispatch' -Destination $skillTarge
 
 3. 在 DSH 新会话中，明确要求按名称加载 `dsh-delivery-dispatch`，确认能够读到 `references/environment-boundary.md`。本机曾验证目录为 `%USERPROFILE%\.dsh\skills`；其他版本若不发现技能，以该应用实际支持的目录为准。
 4. 将 `skills/grok-delivery-review/SKILL.md` 的完整内容交给 Grok Bot，要求用它的原生技能创建/更新能力保存为 `grok-delivery-review`，再按名称重新加载并读回比对。已验证过原生能力，但不同版本界面可能不同；不要把旧机器的内部 `/home/box/...` 路径当作新电脑安装路径。无法使用原生技能时，可要求当前会话直接读取完整文件，明确这是会话指令。
-5. 每次新任务交接明确要求加载对应 skill；不要假定会话间或内部 agent 自动继承。DSH 给 Grok 内部 agent 相同的边界包与调用限制。
+5. Grok Bot 同时安装并读回 `opc-ai-workbench` 的当前正文及本轮需要的引用文件。每次交给 Grok 的任务明确要求加载两份 skill 并回执版本；不要假定会话间或内部 agent 自动继承。DSH 给 Grok 内部 agent 相同的边界包与调用限制。
 6. 在新电脑重新核查软件路径、版本、权限、网络和桥接归属。使用技术边界模板，不复制旧机器的环境结论。独立 `codex exec` 不继承当前聊天上下文：提示词需完整列明工作目录、目标、基线和验收方法。
 
 ## 最小验收
